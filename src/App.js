@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Header } from './components';
 import { Home, Cart } from './pages';
-import {setPizzas} from './redux/actions/pizzas';
+import { setPizzas } from './redux/actions/pizzas';
+
 
 
 
@@ -33,25 +34,26 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('http://localhost:3000/db.json').then(({ data }) => {
-      // window.store.dispatch(setPizzas(data.pizzas));
+      window.store.dispatch(setPizzas(data.pizzas));
     });
-  }
+  };
 
   render() {
-    return(
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <Route path="/" render={() => <Home items={this.props.items} />} exact />
-        <Route path="/cart" component={Cart} exact />
+    console.log(this.props);
+    return (
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Route path="/" render={() => <Home items={this.props.items} />} exact />
+          <Route path="/cart" component={Cart} exact />
+        </div>
       </div>
-    </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     items: state.pizzas.items,
   };
 };
