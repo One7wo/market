@@ -14,14 +14,14 @@ function Home({ items }) {
                         'Острые',
                         'Закрытые']} />
                 <SortPopup items={[
-                    { name:'популярности', type: 'popular'}, 
-                    { name: 'цене', type: 'price'}, 
-                    {name: 'алфавиту', type: 'alphabet'}]} />
+                    { name: 'популярности', type: 'popular' },
+                    { name: 'цене', type: 'price' },
+                    { name: 'алфавиту', type: 'alphabet' }]} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    items.map(obj => <PizzaBlock
+                    items && items.map(obj => <PizzaBlock
                         key={obj.id}
                         {...obj} />)
                 }
