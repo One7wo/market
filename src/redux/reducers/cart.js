@@ -5,24 +5,28 @@ const initialState = {
 }
 
 const pizzas = (state = initialState, action) => {
-    if (action.type === 'ADD_PIZZA_CART') {
+    
+    switch(action.type){
+    case 'ADD_PIZZA_CART':{
+        const newItems = {
+            ...state.items,
+            [action.payload.id]: 
+                !state.items[action.payload.id] 
+                ? [action.payload.id] 
+                : [...state.items[action.payload.id], action.payload],
+        };
+
+        const allPizzas = [].concat.apply([], Object.values(newItems));
+        // const totalPrice = allPizzas.reduce((sum, obj) => obj.price + sum, 0);
         return {
             ...state,
-            items: {
-                [action.payload.id]: [
-                    ...state.items[action.payload.id],
-                    action.payload
-                ]
-            },
-        };
+            items: newItems,
+            totalCount: allPizzas.length,
+            totalPrice:  state.totalPrice + action.payload.price,
+        };  
     }
-    // if (action.type === 'SET_TOTAL_COUNT') {
-    //     return {
-    //         ...state,
-    //         totalCount: action.payload,
-    //     };
-    // }
-    return state;
+        default: return  state;  
+    }
 };
 
 export default pizzas;
