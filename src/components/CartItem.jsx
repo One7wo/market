@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CartItem({name, type, size}) {
+function CartItem({id, name, type, size}) {
     return (
         <div className="cart__item">
                             <div className="cart__item-img">

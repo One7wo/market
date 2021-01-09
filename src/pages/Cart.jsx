@@ -5,9 +5,13 @@ import {useSelector} from 'react-redux';
 function Cart() {
     const {totalPrice, totalCount, items} = useSelector(({cart}) => cart);
 
-    const addedPizzas = Object.keys(items).map(key => {
+    // const addedPizzas = Object.keys(items).map(key => {
+    //     return items[key][0];
+    // });
+    console.log(items)
+    const addedPizzas = Object.keys(items).map((key) => {
         return items[key][0];
-    });
+      });
 
     return (
         <div className="content">
@@ -33,7 +37,7 @@ function Cart() {
                     </div>
                     <div className="content__items">
                         {
-                            addedPizzas.map(obj => <CartItem name={obj.name} type={obj.type} size={obj.size}/>)
+                            addedPizzas.map((obj) => (<CartItem key={obj.id} name={obj.name} type={obj.type} size={obj.size}/>))
                         }
                       {/* <CartItem name="Сырный цыпленок" type="тонкое" size={26} />   */}
                     </div>
